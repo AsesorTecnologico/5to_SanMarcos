@@ -761,24 +761,6 @@
                 });
             });
             
-            // Configurar eventos para los enlaces de Drive
-            document.addEventListener('click', function(e) {
-                if(e.target && (e.target.classList.contains('drive-link') || e.target.parentElement.classList.contains('drive-link'))) {
-                    e.preventDefault();
-                    const linkElement = e.target.classList.contains('drive-link') ? e.target : e.target.parentElement;
-                    const courseId = linkElement.dataset.courseId;
-                    const courseName = linkElement.closest('.course-card').querySelector('h3').textContent;
-                    const driveLink = linkElement.getAttribute('href');
-                    
-                    // En un entorno real, esto redirigiría a Google Drive
-                    // Para esta demostración, mostramos un mensaje
-                    alert(`En un sitio real, esto te llevaría a Google Drive para:\n\nCurso: ${courseName}\nAño: ${currentYear}\n\nEnlace: ${driveLink}`);
-                    
-                    // En producción, descomentar la siguiente línea para redirigir realmente
-                    // window.open(driveLink, '_blank');
-                }
-            });
-            
             // Agregar efecto de carga inicial
             setTimeout(() => {
                 document.body.style.opacity = 1;
