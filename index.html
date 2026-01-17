@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Material de 5to Pre - San Marcos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #0a4d8c;
+            --secondary-color: #ff6b00;
+            --accent-color: #e63946;
+            --light-color: #f8f9fa;
+            --dark-color: #343a40;
+            --card-bg: #ffffff;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --tab-inactive: #e9ecef;
+            --tab-active: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f0f4f8;
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #0a3a6b 100%);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .header-decoration {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 1;
+        }
+
+        /* Tabs */
+        .tabs-container {
+            background-color: white;
+            margin: 2rem auto 0;
+            border-radius: 10px 10px 0 0;
+            box-shadow: var(--shadow);
+            max-width: 1200px;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #eee;
+        }
+
+        .tab {
+            flex: 1;
+            text-align: center;
+            padding: 1.2rem 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background-color: var(--tab-inactive);
+            color: #666;
+            border: none;
+            outline: none;
+        }
+
+        .tab:first-child {
+            border-radius: 10px 0 0 0;
+        }
+
+        .tab:last-child {
+            border-radius: 0 10px 0 0;
+        }
+
+        .tab:hover {
+            background-color: #e0e0e0;
+        }
+
+        .tab.active {
+            background-color: var(--tab-active);
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .tab-badge {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            font-size: 0.8rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            margin-left: 8px;
+            vertical-align: middle;
+        }
+
+        /* Año activo indicador */
+        .year-indicator {
+            text-align: center;
+            margin: 1.5rem auto;
+            background-color: white;
+            padding: 0.8rem;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            max-width: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .year-indicator i {
+            color: var(--secondary-color);
+            font-size: 1.2rem;
+        }
+
+        .year-indicator span {
+            font-weight: 700;
+            color: var(--primary-color);
+            font-size: 1.3rem;
+        }
+
+        /* Contador de cursos */
+        .courses-counter {
+            text-align: center;
+            margin: 0.5rem auto 1.5rem;
+            color: #666;
+            font-size: 1.1rem;
+        }
+
+        .courses-counter span {
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        /* Main content */
+        .intro {
+            text-align: center;
+            padding: 2rem 0 1rem;
+            background-color: white;
+            margin: 0 auto 0;
+            border-radius: 0 0 10px 10px;
+            box-shadow: var(--shadow);
+            max-width: 1200px;
+        }
+
+        .intro p {
+            font-size: 1.1rem;
+            color: #555;
+            padding: 0 1.5rem;
+        }
+
+        /* Grid de cursos */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 2rem 0;
+        }
+
+        .course-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            text-align: center;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #eaeaea;
+            position: relative;
+        }
+
+        .course-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .course-logo {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(to right, #f8f9fa, #e9ecef);
+            padding: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .course-logo i {
+            font-size: 3.5rem;
+            color: var(--primary-color);
+        }
+
+        .course-content {
+            padding: 1.5rem 1rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .course-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.3rem;
+            min-height: 3.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .course-content p {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+        }
+
+        .drive-link {
+            display: inline-block;
+            background-color: var(--secondary-color);
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .drive-link:hover {
+            background-color: #e55a00;
+            transform: scale(1.05);
+        }
+
+        .drive-link i {
+            margin-right: 8px;
+        }
+
+        .year-tag {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.75rem;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 2rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--secondary-color);
+        }
+
+        .copyright {
+            margin-top: 1.5rem;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1100px) {
+            .courses-grid {
+                grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+                gap: 1.2rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .courses-grid {
+                grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+                gap: 1.2rem;
+            }
+            
+            header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tab {
+                font-size: 1.1rem;
+                padding: 1rem 0.8rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+            
+            .course-logo i {
+                font-size: 3rem;
+            }
+            
+            .course-content h3 {
+                font-size: 1.2rem;
+                min-height: 2.8rem;
+            }
+            
+            header h1 {
+                font-size: 1.9rem;
+            }
+            
+            header p {
+                font-size: 1rem;
+            }
+            
+            .tabs-container {
+                margin: 1.5rem auto 0;
+            }
+            
+            .tab {
+                font-size: 1rem;
+                padding: 0.9rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .courses-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.8rem;
+            }
+            
+            .course-logo {
+                height: 100px;
+                padding: 1rem;
+            }
+            
+            .course-logo i {
+                font-size: 2.5rem;
+            }
+            
+            .course-content {
+                padding: 1rem 0.8rem;
+            }
+            
+            .course-content h3 {
+                font-size: 1.1rem;
+                min-height: 2.6rem;
+            }
+            
+            .intro {
+                padding: 1.5rem 0;
+                margin: 0 auto 1rem;
+            }
+            
+            .intro p {
+                padding: 0 1rem;
+                font-size: 1rem;
+            }
+            
+            header {
+                padding: 1.5rem 0;
+            }
+            
+            header h1 {
+                font-size: 1.7rem;
+            }
+            
+            .tabs {
+                flex-direction: column;
+            }
+            
+            .tab {
+                border-radius: 0 !important;
+                text-align: left;
+                padding-left: 1.5rem;
+            }
+            
+            .tab:first-child {
+                border-radius: 10px 10px 0 0 !important;
+            }
+            
+            .year-indicator {
+                max-width: 250px;
+                padding: 0.6rem;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .courses-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-decoration"></div>
+        <div class="container header-content">
+            <h1><i class="fas fa-graduation-cap"></i> Material de 5to Pre - San Marcos</h1>
+            <p>Accede al material de estudio de todos los cursos organizado por año académico. Cada curso incluye enlaces a recursos en Google Drive.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Pestañas de años -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" data-year="2025">
+                    2025 <span class="tab-badge">Actual</span>
+                </button>
+                <button class="tab" data-year="2026">
+                    2026 <span class="tab-badge">Próximo</span>
+                </button>
+            </div>
+            
+            <div class="intro">
+                <div class="year-indicator">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Material del año: <span id="current-year">2025</span></span>
+                </div>
+                <div class="courses-counter">
+                    <span id="courses-count">17</span> cursos disponibles
+                </div>
+                <p>Selecciona cualquier curso para acceder al material de estudio correspondiente. Cada enlace te llevará a una carpeta de Google Drive con documentos, presentaciones, ejercicios y otros recursos organizados para tu aprendizaje.</p>
+            </div>
+        </div>
+
+        <!-- Grid de cursos -->
+        <section class="courses-grid" id="courses-container">
+            <!-- Los cursos se generarán con JavaScript -->
+        </section>
+    </main>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-school"></i>
+            </div>
+            <p>Portal de Material Académico - 5to Pre San Marcos</p>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-envelope"></i> Contacto</a>
+                <a href="#"><i class="fas fa-info-circle"></i> Acerca de</a>
+                <a href="#"><i class="fas fa-question-circle"></i> Ayuda</a>
+            </div>
+            <p class="copyright">© 2023-2026 Colegio San Marcos. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Datos de los cursos con sus logos, información y enlaces por año
+        const coursesData = {
+            courses: [
+                {
+                    id: 1,
+                    name: "Aritmética",
+                    description: "Números, operaciones básicas, fracciones, decimales y más.",
+                    icon: "fas fa-calculator",
+                    color: "#0a4d8c"
+                },
+                {
+                    id: 2,
+                    name: "Álgebra",
+                    description: "Expresiones algebraicas, ecuaciones, funciones y polinomios.",
+                    icon: "fas fa-square-root-alt",
+                    color: "#e63946"
+                },
+                {
+                    id: 3,
+                    name: "Biología",
+                    description: "Células, seres vivos, ecosistemas y anatomía humana.",
+                    icon: "fas fa-dna",
+                    color: "#2a9d8f"
+                },
+                {
+                    id: 4,
+                    name: "Física",
+                    description: "Movimiento, fuerzas, energía, ondas y electricidad.",
+                    icon: "fas fa-atom",
+                    color: "#9d4edd"
+                },
+                {
+                    id: 5,
+                    name: "Geografía",
+                    description: "Relieve, clima, recursos naturales y cartografía.",
+                    icon: "fas fa-globe-americas",
+                    color: "#40916c"
+                },
+                {
+                    id: 6,
+                    name: "Geometría",
+                    description: "Figuras geométricas, medición, propiedades y transformaciones.",
+                    icon: "fas fa-draw-polygon",
+                    color: "#3a86ff"
+                },
+                {
+                    id: 7,
+                    name: "Historia del Perú",
+                    description: "Culturas preincas, imperio inca, conquista y república.",
+                    icon: "fas fa-landmark",
+                    color: "#dda15e"
+                },
+                {
+                    id: 8,
+                    name: "Historia Universal",
+                    description: "Edades históricas, guerras mundiales y civilizaciones antiguas.",
+                    icon: "fas fa-monument",
+                    color: "#bc6c25"
+                },
+                {
+                    id: 9,
+                    name: "Inglés",
+                    description: "Gramática, vocabulario, comprensión auditiva y conversación.",
+                    icon: "fas fa-language",
+                    color: "#7209b7"
+                },
+                {
+                    id: 10,
+                    name: "Lenguaje",
+                    description: "Gramática, comunicación, comprensión lectora y redacción.",
+                    icon: "fas fa-spell-check",
+                    color: "#3a86ff"
+                },
+                {
+                    id: 11,
+                    name: "Literatura",
+                    description: "Géneros literarios, autores, obras y análisis textual.",
+                    icon: "fas fa-book-open",
+                    color: "#8338ec"
+                },
+                {
+                    id: 12,
+                    name: "Psicología",
+                    description: "Procesos mentales, emociones, desarrollo humano y conducta.",
+                    icon: "fas fa-brain",
+                    color: "#ff006e"
+                },
+                {
+                    id: 13,
+                    name: "Química",
+                    description: "Elementos, compuestos, reacciones y tabla periódica.",
+                    icon: "fas fa-flask",
+                    color: "#fb5607"
+                },
+                {
+                    id: 14,
+                    name: "Razonamiento Matemático",
+                    description: "Problemas lógicos, secuencias, analogías y patrones.",
+                    icon: "fas fa-puzzle-piece",
+                    color: "#3d405b"
+                },
+                {
+                    id: 15,
+                    name: "Razonamiento Verbal",
+                    description: "Sinónimos, antónimos, analogías verbales y comprensión.",
+                    icon: "fas fa-comment-alt",
+                    color: "#588157"
+                },
+                {
+                    id: 16,
+                    name: "Trigonometría",
+                    description: "Triángulos, funciones trigonométricas, identidades y aplicaciones.",
+                    icon: "fas fa-shapes",
+                    color: "#1d3557"
+                },
+                {
+                    id: 17,
+                    name: "Economía",
+                    description: "Sistemas económicos, oferta y demanda, mercado y finanzas.",
+                    icon: "fas fa-chart-line",
+                    color: "#2d6a4f"
+                }
+            ],
+            
+            // Enlaces de Google Drive por año para cada curso
+            driveLinks: {
+                2025: {
+                    1: "https://drive.google.com/drive/folders/1SykX72K_u8-G32HNtBnfcc1WOwlkxUZm?usp=drive_link",
+                    2: "https://drive.google.com/drive/folders/153OEOZCKul5vMUqZQndOg776cMHZVga4?usp=drive_link",
+                    3: "https://drive.google.com/drive/folders/1WZOpg5SujMPLCGBsdWhYVuzlV9p2AWMb?usp=drive_link",
+                    4: "https://drive.google.com/drive/folders/1s3BazfC9vEEPPfGgAKIWf8dypIG7YZD_?usp=drive_link",
+                    5: "https://drive.google.com/drive/folders/1t4YQgCQCjCTXEIqRGhvDx2NOHzvO6Pmk?usp=drive_link",
+                    6: "https://drive.google.com/drive/folders/1tZy_ARiCdoPOX66Bwl8XDCwnSpkazt3O?usp=drive_link",
+                    7: "https://drive.google.com/drive/folders/1SZ4ec3Dk8kJ-cHEefXEJAdx9axW2pHwO?usp=drive_link",
+                    8: "https://drive.google.com/drive/folders/1OHii7BJS5tvyJ36QQkYzhQpJ0NqtEraP?usp=drive_link",
+                    9: "https://drive.google.com/drive/folders/1MvEI2r5ynpur6_4QE_xjMiIZ_fndw22R?usp=drive_link",
+                    10: "https://drive.google.com/drive/folders/1LFfMh9Ji8twC6KyeFx-GUNZkEsKZngz1?usp=drive_link",
+                    11: "https://drive.google.com/drive/folders/1Gv8jbJLCrh7_EsAcfJw-1kQkkZB2bsPb?usp=drive_link",
+                    12: "https://drive.google.com/drive/folders/1ajfX23EbyzdazgD-G7WDNVGmJkRm6-HB?usp=drive_link",
+                    13: "https://drive.google.com/drive/folders/1-1FzxMavtnAoaVftxzGmd9WnaBphf1ag?usp=drive_link",
+                    14: "https://drive.google.com/drive/folders/1cvY_foOVWnj1cBMKvOUt-R5yqPbww5xC?usp=drive_link",
+                    15: "https://drive.google.com/drive/folders/1DWrJtzgR_0ZiN9244yahbKSfLnMD1vn0?usp=drive_link",
+                    16: "https://drive.google.com/drive/folders/1pHj14W82M4b4xFzIsmTdeYklu_vWwliD?usp=drive_link",
+                    17: "https://drive.google.com/drive/folders/11_I9zIcJyFKewUGYVlHfDn9I645SPp1q?usp=drive_link"
+                },
+                2026: {
+                    1: "https://drive.google.com/drive/folders/1Ql7X-1XAE825nAVwabh1aijj6ruANhzH?usp=drive_link",
+                    2: "https://drive.google.com/drive/folders/1Pro8WBg5c-molO_0zlELKTV2r987KnTb?usp=drive_link",
+                    3: "https://drive.google.com/drive/folders/1WdErBNp5TzGwhYWqEQBtEMayNDSTHtba?usp=drive_link",
+                    4: "https://drive.google.com/drive/folders/1EBEv6olXuupU5uGmIMo-vRlVubXpvrw2?usp=drive_link",
+                    5: "https://drive.google.com/drive/folders/1ptrMFcQyHv7_rF4qI5yj4aDkW5tNr358?usp=drive_link",
+                    6: "https://drive.google.com/drive/folders/1sQBcHAPH4jTUTnnOq9UHS-s4J3wMik2Y?usp=drive_link",
+                    7: "https://drive.google.com/drive/folders/1ShZsUn_JRiTEjLDPVkA5j6FBQdA3zcOR?usp=drive_link",
+                    8: "https://drive.google.com/drive/folders/12r0IOBqIw1ze8vLIym4ugiSgPzQ30EwD?usp=drive_link",
+                    9: "https://drive.google.com/drive/folders/199NZY3BEsQFKssK708IvRU2USfxx8y5O?usp=drive_link",
+                    10: "https://drive.google.com/drive/folders/1Z-EDy85VNcDWLizOAC4bBnwrDKV9wOWs?usp=drive_link",
+                    11: "https://drive.google.com/drive/folders/1HqpzFZW2j1AO5YzZa56ml1UEgDeQyBtX?usp=drive_link",
+                    12: "https://drive.google.com/drive/folders/1sperO33_9w7KNVDDh4z5Kk5mSqD0p_md?usp=drive_link",
+                    13: "https://drive.google.com/drive/folders/16JnrTinNJt5Nft04yp5wOIc1PpWI6i1n?usp=drive_link",
+                    14: "https://drive.google.com/drive/folders/1rpoR46OzTiTBTXTkyeWxbZCwHgR0Mo8a?usp=drive_link",
+                    15: "https://drive.google.com/drive/folders/1ZeWkKP0LO4VgCXQV14gd1NNo8D7lYueK?usp=drive_link",
+                    16: "https://drive.google.com/drive/folders/1wroOOiUXCoI-aSMUvlW2BUn_s14_HYgs?usp=drive_link",
+                    17: "https://drive.google.com/drive/folders/17gZ86cSU7WGB7INrxtZgn2uSs5iQifnF?usp=drive_link"
+                }
+            }
+        };
+
+        // Variables globales
+        let currentYear = 2025;
+
+        // Función para generar las tarjetas de cursos para el año actual
+        function generateCourseCards() {
+            const container = document.getElementById('courses-container');
+            container.innerHTML = '';
+            
+            // Actualizar contador de cursos
+            document.getElementById('courses-count').textContent = coursesData.courses.length;
+            
+            coursesData.courses.forEach(course => {
+                const card = document.createElement('div');
+                card.className = 'course-card';
+                
+                // Obtener el enlace para el año actual
+                const driveLink = coursesData.driveLinks[currentYear][course.id];
+                
+                // Asignar un color único al icono de cada curso
+                const iconStyle = `color: ${course.color}`;
+                
+                card.innerHTML = `
+                    <div class="year-tag">${currentYear}</div>
+                    <div class="course-logo">
+                        <i class="${course.icon}" style="${iconStyle}"></i>
+                    </div>
+                    <div class="course-content">
+                        <h3>${course.name}</h3>
+                        <p>${course.description}</p>
+                        <a href="${driveLink}" target="_blank" class="drive-link" data-course-id="${course.id}">
+                            <i class="fab fa-google-drive"></i> Acceder al Material
+                        </a>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+            
+            // Actualizar el indicador de año
+            document.getElementById('current-year').textContent = currentYear;
+        }
+
+        // Función para cambiar de año
+        function changeYear(year) {
+            // Actualizar año actual
+            currentYear = year;
+            
+            // Actualizar pestañas activas
+            document.querySelectorAll('.tab').forEach(tab => {
+                if (parseInt(tab.dataset.year) === year) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Regenerar las tarjetas con los enlaces del año seleccionado
+            generateCourseCards();
+        }
+
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Generar las tarjetas iniciales (año 2025)
+            generateCourseCards();
+            
+            // Configurar eventos para las pestañas
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const year = parseInt(this.dataset.year);
+                    changeYear(year);
+                });
+            });
+            
+            // Configurar eventos para los enlaces de Drive
+            document.addEventListener('click', function(e) {
+                if(e.target && (e.target.classList.contains('drive-link') || e.target.parentElement.classList.contains('drive-link'))) {
+                    e.preventDefault();
+                    const linkElement = e.target.classList.contains('drive-link') ? e.target : e.target.parentElement;
+                    const courseId = linkElement.dataset.courseId;
+                    const courseName = linkElement.closest('.course-card').querySelector('h3').textContent;
+                    const driveLink = linkElement.getAttribute('href');
+                    
+                    // En un entorno real, esto redirigiría a Google Drive
+                    // Para esta demostración, mostramos un mensaje
+                    alert(`En un sitio real, esto te llevaría a Google Drive para:\n\nCurso: ${courseName}\nAño: ${currentYear}\n\nEnlace: ${driveLink}`);
+                    
+                    // En producción, descomentar la siguiente línea para redirigir realmente
+                    // window.open(driveLink, '_blank');
+                }
+            });
+            
+            // Agregar efecto de carga inicial
+            setTimeout(() => {
+                document.body.style.opacity = 1;
+            }, 100);
+        });
+        
+        // Efecto de carga inicial
+        document.body.style.opacity = 0;
+        document.body.style.transition = 'opacity 0.5s ease';
+    </script>
+</body>
+</html>
